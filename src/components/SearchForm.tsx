@@ -1,11 +1,7 @@
-import { useState } from "react";
-
 type FormEvent = React.FormEvent<HTMLFormElement>;
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-export default function SearchForm() {
-	const [searchText, setSearchText] = useState("");
-
+export default function SearchForm({ searchText, setSearchText }) {
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
 	};
