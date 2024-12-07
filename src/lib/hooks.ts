@@ -31,12 +31,10 @@ export const useGetActiveID = () => {
 	const [activeID, setActiveID] = useState<number | null>(null);
 
 	useEffect(() => {
-		if (!window.location.hash) return;
-
 		const handleHashChange = () => {
 			const jobID = +window.location.hash.slice(1);
+			if (!jobID) return;
 			setActiveID(jobID);
-			console.log(jobID);
 		};
 		handleHashChange();
 
@@ -48,4 +46,22 @@ export const useGetActiveID = () => {
 	}, []);
 
 	return activeID;
+};
+
+export const useGetJobItem = (activeID: number | null) => {
+	const [jobItemData, setJobItemData] = useState<jobItem | null>(null);
+
+	useEffect(() => {
+		if (!activeID) return;
+
+		const fetchJobItemData = async () => {
+			const response = await fetch(`${BASE_URL}/${activeID}`);
+			const data = await response.json();
+			setJobItemData(data);
+			console.log(data);
+		};
+		fetchJobItemData();
+	}, [activeID]);
+
+	return jobItemData;
 };
