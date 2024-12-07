@@ -1,7 +1,15 @@
 type FormEvent = React.FormEvent<HTMLFormElement>;
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-export default function SearchForm({ searchText, setSearchText }) {
+type SearchFormProps = {
+	searchText: string;
+	setSearchText: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function SearchForm({
+	searchText,
+	setSearchText,
+}: SearchFormProps) {
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
 	};

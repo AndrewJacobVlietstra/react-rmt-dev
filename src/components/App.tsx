@@ -1,33 +1,48 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
-import Header from "./Header";
-import { BASE_URL } from "../lib/constants";
+import Header, { HeaderTop } from "./Header";
+import BookmarksButton from "./BookmarksButton";
+import Logo from "./Logo";
+import SearchForm from "./SearchForm";
+import JobItemContent from "./JobItemContent";
+import Sidebar, { SidebarTop } from "./Sidebar";
+import JobList from "./JobList";
+import PaginationControls from "./PaginationControls";
+import ResultsCount from "./ResultsCount";
+import SortingControls from "./SortingControls";
+import { useJobItems } from "../lib/hooks";
 
 export default function App() {
 	const [searchText, setSearchText] = useState("");
-	const [jobItems, setJobItems] = useState([]);
-
-	useEffect(() => {
-		if (!searchText) return;
-
-		const fetchSearchResults = async () => {
-			const response = await fetch(`${BASE_URL}?search=${searchText}`);
-			const data = await response.json();
-			setJobItems(data.jobItems);
-		};
-
-		fetchSearchResults();
-	}, [searchText]);
+	const { jobItems, isLoading } = useJobItems(searchText);
 
 	return (
 		<>
 			<Background />
 
-			<Header searchText={searchText} setSearchText={setSearchText} />
+			<Header>
+				<HeaderTop>
+					<Logo />
+					<BookmarksButton />
+				</HeaderTop>
 
-			<Container jobItems={jobItems} />
+				<SearchForm searchText={searchText} setSearchText={setSearchText} />
+			</Header>
+
+			<Container>
+				<Sidebar>
+					<SidebarTop>
+						<ResultsCount />
+						<SortingControls />
+					</SidebarTop>
+
+					<JobList jobItems={jobItems} isLoading={isLoading} />
+					<PaginationControls />
+				</Sidebar>
+				<JobItemContent />
+			</Container>
 
 			<Footer />
 		</>
