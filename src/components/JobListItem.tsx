@@ -6,11 +6,11 @@ type JobListItemProps = {
 };
 
 export default function JobListItem({ jobItem }: JobListItemProps) {
-	const { badgeLetters, title, company, daysAgo } = jobItem;
+	const { id, badgeLetters, title, company, daysAgo } = jobItem;
 
 	return (
 		<li className="job-item">
-			<a className="job-item__link">
+			<a href={`#${id}`} className="job-item__link">
 				<div className="job-item__badge">{badgeLetters}</div>
 
 				<div className="job-item__middle">
