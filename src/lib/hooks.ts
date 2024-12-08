@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "./constants";
-import { jobItem } from "./types";
+import { jobItem, jobListItem } from "./types";
 
 export const useJobItems = (searchText: string) => {
-	const [jobItems, setJobItems] = useState<jobItem[] | []>([]);
+	const [jobItems, setJobItems] = useState<jobListItem[] | []>([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const jobItemsSliced = jobItems.slice(0, 7);
@@ -48,20 +48,25 @@ export const useGetActiveID = () => {
 	return activeID;
 };
 
-export const useGetJobItem = (activeID: number | null) => {
+export const useGetJobItem = (id: number | null) => {
 	const [jobItemData, setJobItemData] = useState<jobItem | null>(null);
 
 	useEffect(() => {
-		if (!activeID) return;
+		if (!id) return;
 
 		const fetchJobItemData = async () => {
-			const response = await fetch(`${BASE_URL}/${activeID}`);
+			const response = await fetch(`${BASE_URL}/${id}`);
 			const data = await response.json();
-			setJobItemData(data);
-			console.log(data);
+			setJobItemData(data.jobItem);
 		};
 		fetchJobItemData();
-	}, [activeID]);
+	}, [id]);
 
+	return jobItemData;
+};
+
+export const useGetActiveJobItem = () => {
+	const activeID = useGetActiveID();
+	const jobItemData = useGetJobItem(activeID);
 	return jobItemData;
 };
