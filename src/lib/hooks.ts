@@ -6,6 +6,7 @@ export const useJobItems = (searchText: string) => {
 	const [jobItems, setJobItems] = useState<jobListItem[] | []>([]);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const totalJobItems = jobItems.length;
 	const jobItemsSliced = jobItems.slice(0, 7);
 
 	useEffect(() => {
@@ -24,7 +25,7 @@ export const useJobItems = (searchText: string) => {
 		fetchSearchResults();
 	}, [searchText]);
 
-	return [jobItemsSliced, isLoading] as const;
+	return { jobItemsSliced, isLoading, totalJobItems };
 };
 
 export const useGetActiveID = () => {
@@ -50,7 +51,7 @@ export const useGetActiveID = () => {
 
 export const useGetJobItem = (id: number | null) => {
 	const [jobItemData, setJobItemData] = useState<jobItem | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (!id) return;
@@ -72,6 +73,18 @@ export const useGetJobItem = (id: number | null) => {
 
 export const useGetActiveJobItem = () => {
 	const activeID = useGetActiveID();
-	const jobItemData = useGetJobItem(activeID);
-	return jobItemData;
+	const [jobItemData, isLoading] = useGetJobItem(activeID);
+
+	return [jobItemData, isLoading] as const;
+};
+
+export const useDebounce = <T>(value: T, delay = 550): T => {
+	const [debouncedValue, setDebouncedValue] = useState(value);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => setDebouncedValue(value), delay);
+		return () => clearTimeout(timeout);
+	}, [value, delay]);
+
+	return debouncedValue;
 };
