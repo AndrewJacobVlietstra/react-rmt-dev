@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 import { BASE_URL } from "./constants";
-import { jobItem, jobListItem } from "./types";
+import { jobListItem } from "./types";
 import { useQuery } from "@tanstack/react-query";
+import { fetchJobItem } from "./utility";
 
 export const useJobItem = (id: number | null) => {
-	const { data, isLoading } = useQuery(
+	const { data, isInitialLoading } = useQuery(
 		["job-item", id],
-		async () => {
-			const response = await fetch(`${BASE_URL}/${id}`);
-			const data = await response.json();
-			return data;
-		},
+		() => (id ? fetchJobItem(id) : null),
 		{
 			staleTime: 1000 * 60 * 60,
 			refetchOnWindowFocus: false,
 			retry: false,
 			enabled: Boolean(id),
-			onError: () => {},
+			onError: (error) => {
+				console.log(error);
+			},
 		}
 	);
 
-	const jobItem: jobItem = data?.jobItem;
+	const jobItem = data?.jobItem;
+	const isLoading = isInitialLoading;
 	return [jobItem, isLoading] as const;
 };
 

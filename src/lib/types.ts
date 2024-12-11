@@ -18,3 +18,8 @@ export type jobItem = jobListItem & {
 	salary: string;
 	title: string;
 };
+
+export type jobItemApiResponse = {
+	public: boolean;
+	jobItem: jobItem;
+};
