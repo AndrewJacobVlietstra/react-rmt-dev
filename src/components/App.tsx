@@ -19,8 +19,8 @@ export default function App() {
 	const debouncedSearchText = useDebounce(searchText);
 	const { jobItems, isLoading } = useJobItems(debouncedSearchText);
 
-	const totalJobItems = jobItems.length;
-	const jobItemsSliced = jobItems.slice(0, 7);
+	const totalJobItems = jobItems?.length || 0;
+	const jobItemsSliced = jobItems?.slice(0, 7) || [];
 
 	return (
 		<>
