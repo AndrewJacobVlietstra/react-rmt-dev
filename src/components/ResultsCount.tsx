@@ -5,7 +5,7 @@ type ResultsCountProps = {
 export default function ResultsCount({ totalJobItems }: ResultsCountProps) {
 	return (
 		<p className="count">
-			<span className="u-bold">{totalJobItems}</span> results
+			<span className="u-bold">{totalJobItems}</span> Results
 		</p>
 	);
 }
