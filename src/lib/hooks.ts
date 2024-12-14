@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchJobItem, fetchJobItems } from "./utility";
+import toast from "react-hot-toast";
 
 export const useJobItem = (id: number | null) => {
 	const { data, isInitialLoading } = useQuery(
@@ -32,7 +33,7 @@ export const useJobItems = (searchText: string) => {
 			retry: false,
 			enabled: Boolean(searchText),
 			onError: (error) => {
-				console.log(error);
+				toast.error(error.message);
 			},
 		}
 	);
