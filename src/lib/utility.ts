@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { BASE_URL } from "./constants";
 import { jobItemApiResponse, jobItemsApiResponse } from "./types";
 
@@ -27,4 +28,18 @@ export const fetchJobItems = async (
 
 	const data = await response.json();
 	return data;
+};
+
+export const handleError = (error: unknown) => {
+	let message;
+
+	if (error instanceof Error) {
+		message = error.message;
+	} else if (typeof error === "string") {
+		message = error;
+	} else {
+		message = "An error occurred.";
+	}
+
+	toast.error(message);
 };
