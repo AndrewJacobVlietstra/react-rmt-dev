@@ -19,9 +19,22 @@ export default function App() {
 	const [searchText, setSearchText] = useState("");
 	const debouncedSearchText = useDebounce(searchText);
 	const { jobItems, isLoading } = useJobItems(debouncedSearchText);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const totalJobItems = jobItems?.length || 0;
 	const jobItemsSliced = jobItems?.slice(0, 7) || [];
+
+	const handlePageChange = (direction: "next" | "previous") => {
+		if (direction === "next") {
+			setCurrentPage((prev) => prev + 1);
+		} else if (direction === "previous") {
+			setCurrentPage((prev) => {
+				const newValue = prev - 1;
+				if (newValue < 1) return 1;
+				return newValue;
+			});
+		}
+	};
 
 	return (
 		<>
@@ -42,7 +55,10 @@ export default function App() {
 					</SidebarTop>
 
 					<JobList jobItems={jobItemsSliced} isLoading={isLoading} />
-					<PaginationControls />
+					<PaginationControls
+						currentPage={currentPage}
+						onPageChange={handlePageChange}
+					/>
 				</Sidebar>
 
 				<JobItemContent />
