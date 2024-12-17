@@ -1,9 +1,10 @@
+import { PageDirection } from "../lib/types";
 import PaginationButton from "./PaginationButton";
 
 type PaginationControlsProps = {
 	totalPages: number;
 	currentPage: number;
-	onPageChange: (direction: "next" | "previous") => void;
+	onPageChange: (direction: PageDirection) => void;
 };
 
 export default function PaginationControls({
