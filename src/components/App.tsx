@@ -77,7 +77,7 @@ export default function App() {
 					<SidebarTop>
 						<ResultsCount totalJobItems={totalJobItems} />
 						<SortingControls
-							onSortByChange={handleSortByChange}
+							handleSortByChange={handleSortByChange}
 							sortBy={sortBy}
 						/>
 					</SidebarTop>
