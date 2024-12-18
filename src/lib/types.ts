@@ -33,3 +33,5 @@ export type jobItemsApiResponse = {
 export type SortBy = "relevant" | "recent";
 
 export type PageDirection = "previous" | "next";
+
+export type bookmarkedIDs = number[];

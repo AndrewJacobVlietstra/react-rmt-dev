@@ -54,7 +54,6 @@ export default function App() {
 			});
 		}
 	};
-
 	const handleSortByChange = (newSortBy: SortBy) => {
 		if (sortBy === newSortBy) return;
 		setCurrentPage(1);

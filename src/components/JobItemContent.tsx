@@ -23,6 +23,7 @@ export default function JobItemContent() {
 		reviews,
 		salary,
 		title,
+		id,
 	} = jobItemData;
 
 	return (
@@ -40,7 +41,7 @@ export default function JobItemContent() {
 						<div className="job-info__below-badge">
 							<time className="job-info__time">{daysAgo}d</time>
 
-							<BookmarkIcon />
+							<BookmarkIcon id={id} />
 						</div>
 					</div>
 

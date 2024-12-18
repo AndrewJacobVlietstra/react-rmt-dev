@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { BookmarksContext } from "../contexts/BookmarksContextProvider";
 import { useQuery } from "@tanstack/react-query";
 import { fetchJobItem, fetchJobItems, handleError } from "./utility";
 
@@ -66,4 +67,16 @@ export const useDebounce = <T>(value: T, delay = 550): T => {
 	}, [value, delay]);
 
 	return debouncedValue;
+};
+
+export const useBookmarksContext = () => {
+	const context = useContext(BookmarksContext);
+
+	if (!context) {
+		throw new Error(
+			"useContext must be used within Context Provider Component!"
+		);
+	}
+
+	return context;
 };
