@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { BookmarksContext } from "../contexts/BookmarksContextProvider";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { fetchJobItem, fetchJobItems, handleError } from "./utility";
 
 export const useJobItem = (id: number | null) => {
@@ -21,7 +21,27 @@ export const useJobItem = (id: number | null) => {
 	return [jobItem, isLoading] as const;
 };
 
-export const useJobItems = (searchText: string) => {
+export const useJobItems = (ids: number[]) => {
+	const results = useQueries({
+		queries: ids.map((id) => ({
+			queryKey: ["job-item", id],
+			queryFn: () => fetchJobItem(id),
+			staleTime: 1000 * 60 * 60,
+			refetchOnWindowFocus: false,
+			retry: false,
+			enabled: Boolean(id),
+			onError: handleError,
+		})),
+	});
+
+	const jobItems = results
+		.map((item) => item?.data?.jobItem)
+		.filter((item) => item !== undefined);
+	const isLoading = results.some((item) => item.isLoading);
+	return [jobItems, isLoading] as const;
+};
+
+export const useSearchQuery = (searchText: string) => {
 	const { data, isInitialLoading } = useQuery(
 		["job-items", searchText],
 		() => fetchJobItems(searchText),
@@ -69,18 +89,6 @@ export const useDebounce = <T>(value: T, delay = 550): T => {
 	return debouncedValue;
 };
 
-export const useBookmarksContext = () => {
-	const context = useContext(BookmarksContext);
-
-	if (!context) {
-		throw new Error(
-			"useContext must be used within Context Provider Component!"
-		);
-	}
-
-	return context;
-};
-
 export const useLocalStorage = <T>(
 	key: string,
 	initialValue: T
@@ -94,4 +102,16 @@ export const useLocalStorage = <T>(
 	}, [key, value]);
 
 	return [value, setValue] as const;
+};
+
+export const useBookmarksContext = () => {
+	const context = useContext(BookmarksContext);
+
+	if (!context) {
+		throw new Error(
+			"useContext must be used within Context Provider Component!"
+		);
+	}
+
+	return context;
 };
