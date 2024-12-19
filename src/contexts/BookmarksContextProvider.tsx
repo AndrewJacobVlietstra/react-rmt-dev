@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { bookmarkedIDs, jobListItem } from "../lib/types";
+import { bookmarkedIDs, jobItem } from "../lib/types";
 import { useJobItems, useLocalStorage } from "../lib/hooks";
 
 type BookmarksContextProviderProps = {
@@ -9,7 +9,7 @@ type BookmarksContextProviderProps = {
 type BookmarksContext = {
 	isLoading: boolean;
 	bookmarkedIDs: bookmarkedIDs;
-	bookmarkedJobItems: jobListItem[];
+	bookmarkedJobItems: jobItem[];
 	handleToggleBookmark: (id: number) => void;
 };
 

@@ -38,6 +38,7 @@ export const useJobItems = (ids: number[]) => {
 		.map((item) => item?.data?.jobItem)
 		.filter((item) => item !== undefined);
 	const isLoading = results.some((item) => item.isLoading);
+
 	return [jobItems, isLoading] as const;
 };
 
