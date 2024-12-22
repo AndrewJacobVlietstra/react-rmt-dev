@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { BookmarksContext } from "../contexts/BookmarksContextProvider";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { fetchJobItem, fetchJobItems, handleError } from "./utility";
+import { BookmarksContext } from "../contexts/BookmarksContextProvider";
+import { ActiveIDContext } from "../contexts/ActiveIDContextProvider";
+import { CONTEXT_WARNING } from "./constants";
 
 export const useJobItem = (id: number | null) => {
 	const { data, isInitialLoading } = useQuery(
@@ -126,9 +128,17 @@ export const useBookmarksContext = () => {
 	const context = useContext(BookmarksContext);
 
 	if (!context) {
-		throw new Error(
-			"useContext must be used within Context Provider Component!"
-		);
+		throw new Error(CONTEXT_WARNING);
+	}
+
+	return context;
+};
+
+export const useActiveIDContext = () => {
+	const context = useContext(ActiveIDContext);
+
+	if (!context) {
+		throw new Error(CONTEXT_WARNING);
 	}
 
 	return context;
