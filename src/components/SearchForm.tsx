@@ -1,20 +1,16 @@
+import { useSearchTextContext } from "../lib/hooks";
+
 type FormEvent = React.FormEvent<HTMLFormElement>;
 type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-type SearchFormProps = {
-	searchText: string;
-	setSearchText: React.Dispatch<React.SetStateAction<string>>;
-};
+export default function SearchForm() {
+	const { searchText, setSearchText } = useSearchTextContext();
 
-export default function SearchForm({
-	searchText,
-	setSearchText,
-}: SearchFormProps) {
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
 	};
 
-	const handleInputChange = (e: InputChangeEvent) => {
+	const handleChangeSearchText = (e: InputChangeEvent) => {
 		setSearchText(e.target.value);
 	};
 
@@ -26,7 +22,7 @@ export default function SearchForm({
 
 			<input
 				value={searchText}
-				onChange={handleInputChange}
+				onChange={handleChangeSearchText}
 				spellCheck="false"
 				type="text"
 				required

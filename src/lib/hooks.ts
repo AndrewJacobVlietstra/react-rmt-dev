@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { fetchJobItem, fetchJobItems, handleError } from "./utility";
+import { CONTEXT_WARNING } from "./constants";
 import { BookmarksContext } from "../contexts/BookmarksContextProvider";
 import { ActiveIDContext } from "../contexts/ActiveIDContextProvider";
-import { CONTEXT_WARNING } from "./constants";
+import { SearchTextContext } from "../contexts/SearchTextContextProvider";
+import { JobItemsContext } from "../contexts/JobItemsContextProvider";
 
 export const useJobItem = (id: number | null) => {
 	const { data, isInitialLoading } = useQuery(
@@ -136,6 +138,26 @@ export const useBookmarksContext = () => {
 
 export const useActiveIDContext = () => {
 	const context = useContext(ActiveIDContext);
+
+	if (!context) {
+		throw new Error(CONTEXT_WARNING);
+	}
+
+	return context;
+};
+
+export const useSearchTextContext = () => {
+	const context = useContext(SearchTextContext);
+
+	if (!context) {
+		throw new Error(CONTEXT_WARNING);
+	}
+
+	return context;
+};
+
+export const useJobItemsContext = () => {
+	const context = useContext(JobItemsContext);
 
 	if (!context) {
 		throw new Error(CONTEXT_WARNING);

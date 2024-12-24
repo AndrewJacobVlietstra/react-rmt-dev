@@ -1,29 +1,21 @@
-import { PageDirection } from "../lib/types";
+import { useJobItemsContext } from "../lib/hooks";
 import PaginationButton from "./PaginationButton";
 
-type PaginationControlsProps = {
-	totalPages: number;
-	currentPage: number;
-	onPageChange: (direction: PageDirection) => void;
-};
+export default function PaginationControls() {
+	const { currentPage, totalPages, handlePageChange } = useJobItemsContext();
 
-export default function PaginationControls({
-	totalPages,
-	currentPage,
-	onPageChange,
-}: PaginationControlsProps) {
 	return (
 		<section className="pagination">
 			<PaginationButton
 				direction="previous"
 				currentPage={currentPage}
-				onPageChange={onPageChange}
+				onPageChange={handlePageChange}
 			/>
 			{currentPage < totalPages && (
 				<PaginationButton
 					direction="next"
 					currentPage={currentPage}
-					onPageChange={onPageChange}
+					onPageChange={handlePageChange}
 				/>
 			)}
 		</section>
