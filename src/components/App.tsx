@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
@@ -10,7 +11,6 @@ import JobItemContent from "./JobItemContent";
 import PaginationControls from "./PaginationControls";
 import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
-import { Toaster } from "react-hot-toast";
 import JobListSearch from "./JobListSearch";
 
 export default function App() {
