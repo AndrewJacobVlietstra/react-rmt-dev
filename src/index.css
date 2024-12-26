@@ -242,6 +242,15 @@ body::-webkit-scrollbar {
 	transition: all 0.2s;
 }
 
+/* Theme Button */
+.theme__button {
+	background-color: rgb(255, 243, 221);
+	border-radius: 5px;
+	padding: 0.25rem 0.6rem;
+	margin-left: 0.5rem;
+	cursor: pointer;
+}
+
 /* JOB LIST */
 .job-list {
 	background-color: #fff;

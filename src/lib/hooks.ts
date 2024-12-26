@@ -6,6 +6,7 @@ import { BookmarksContext } from "../contexts/BookmarksContextProvider";
 import { ActiveIDContext } from "../contexts/ActiveIDContextProvider";
 import { SearchTextContext } from "../contexts/SearchTextContextProvider";
 import { JobItemsContext } from "../contexts/JobItemsContextProvider";
+import { ThemeContext } from "../contexts/ThemeContextProvider";
 
 export const useJobItem = (id: number | null) => {
 	const { data, isInitialLoading } = useQuery(
@@ -158,6 +159,16 @@ export const useSearchTextContext = () => {
 
 export const useJobItemsContext = () => {
 	const context = useContext(JobItemsContext);
+
+	if (!context) {
+		throw new Error(CONTEXT_WARNING);
+	}
+
+	return context;
+};
+
+export const useThemeContext = () => {
+	const context = useContext(ThemeContext);
 
 	if (!context) {
 		throw new Error(CONTEXT_WARNING);

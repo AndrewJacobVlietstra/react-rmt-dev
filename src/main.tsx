@@ -7,6 +7,7 @@ import BookmarksContextProvider from "./contexts/BookmarksContextProvider.tsx";
 import ActiveIDContextProvider from "./contexts/ActiveIDContextProvider.tsx";
 import SearchTextContextProvider from "./contexts/SearchTextContextProvider.tsx";
 import JobItemsContextProvider from "./contexts/JobItemsContextProvider.tsx";
+import ThemeContextProvider from "./contexts/ThemeContextProvider.tsx";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<ActiveIDContextProvider>
 					<SearchTextContextProvider>
 						<JobItemsContextProvider>
-							<App />
+							<ThemeContextProvider>
+								<App />
+							</ThemeContextProvider>
 						</JobItemsContextProvider>
 					</SearchTextContextProvider>
 				</ActiveIDContextProvider>

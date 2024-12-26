@@ -35,3 +35,5 @@ export type SortBy = "relevant" | "recent";
 export type PageDirection = "previous" | "next";
 
 export type bookmarkedIDs = number[];
+
+export type Theme = "light" | "dark";

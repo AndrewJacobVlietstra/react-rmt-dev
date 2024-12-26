@@ -12,19 +12,23 @@ import PaginationControls from "./PaginationControls";
 import ResultsCount from "./ResultsCount";
 import SortingControls from "./SortingControls";
 import JobListSearch from "./JobListSearch";
+import ThemeButton from "./ThemeButton";
 
 export default function App() {
 	return (
 		<>
 			<Background />
+
 			<Header>
 				<HeaderTop>
 					<Logo />
 					<BookmarksButton />
+					<ThemeButton />
 				</HeaderTop>
 
 				<SearchForm />
 			</Header>
+
 			<Container>
 				<Sidebar>
 					<SidebarTop>
@@ -38,6 +42,7 @@ export default function App() {
 
 				<JobItemContent />
 			</Container>
+
 			<Footer />
 
 			<Toaster position="top-right" />
