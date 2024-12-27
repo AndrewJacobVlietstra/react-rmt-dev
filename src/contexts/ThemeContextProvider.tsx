@@ -18,7 +18,11 @@ export default function ThemeContextProvider({
 }: ThemeContextProviderProps) {
 	const [theme, setTheme] = useLocalStorage<Theme>("rmt-dev-theme", "light");
 	const handleTheme = () => {
-		if (theme === "light") return setTheme("dark");
+		if (theme === "light") {
+			document.body.setAttribute("data-theme", "dark");
+			return setTheme("dark");
+		}
+		document.body.setAttribute("data-theme", "light");
 		return setTheme("light");
 	};
 

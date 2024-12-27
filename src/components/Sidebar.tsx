@@ -1,3 +1,5 @@
+import { useThemeContext } from "../lib/hooks";
+
 type SidebarProps = {
 	children: React.ReactNode;
 };
@@ -7,7 +9,13 @@ type SidebarTopProps = {
 };
 
 export default function Sidebar({ children }: SidebarProps) {
-	return <div className="sidebar">{children}</div>;
+	const { theme } = useThemeContext();
+
+	return (
+		<div data-theme={theme} className="sidebar">
+			{children}
+		</div>
+	);
 }
 
 export function SidebarTop({ children }: SidebarTopProps) {

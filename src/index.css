@@ -9,6 +9,22 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--background-color-primary: #fff;
+	--background-color-secondary: #dee3e9;
+	--background-color-tertiary: #c5cfdb;
+	--font-color: rgb(22, 24, 28);
+	--font-color-secondary: #cacaca;
+}
+
+[data-theme="dark"] {
+	--background-color-primary: #333;
+	--background-color-secondary: rgb(82, 82, 82);
+	--background-color-tertiary: rgb(116, 116, 116);
+	--font-color: #fff;
+	--font-color-secondary: #808080;
+}
+
 ul,
 ol {
 	list-style: none;
@@ -62,13 +78,14 @@ input {
 
 /* BASE */
 body {
-	background-color: #dee3e9;
-	color: rgb(22, 24, 28);
+	background-color: var(--background-color-tertiary);
+	color: var(--font-color);
 	min-height: 100vh;
 	font-family: "Inter", sans-serif;
 	position: relative;
 
 	scrollbar-width: none; /* Firefox */
+	transition: all 0.22s ease-in-out;
 }
 
 body::-webkit-scrollbar {
@@ -244,16 +261,18 @@ body::-webkit-scrollbar {
 
 /* Theme Button */
 .theme__button {
-	background-color: rgb(255, 243, 221);
+	background-color: var(--background-color-primary);
+	color: var(--font-color);
+	font-size: 0.85rem;
 	border-radius: 5px;
-	padding: 0.25rem 0.6rem;
+	padding: 0.15rem 0.6rem;
 	margin-left: 0.5rem;
 	cursor: pointer;
 }
 
 /* JOB LIST */
 .job-list {
-	background-color: #fff;
+	/* background-color: #fff; */
 	position: relative;
 	min-height: 140px;
 	/* height: 100%; */
@@ -357,7 +376,8 @@ body::-webkit-scrollbar {
 .job-item {
 	cursor: pointer;
 	transition: background-color 0.2s;
-	background-color: #fff;
+	background-color: var(--background-color-primary);
+	color: var(--font-color);
 	/* flex: 1; */
 	height: 76px;
 }
@@ -367,11 +387,11 @@ body::-webkit-scrollbar {
 }
 
 .job-item:hover {
-	background-color: #f4f5f7;
+	background-color: var(--background-color-tertiary);
 }
 
 .job-item--active {
-	background-color: #f4f5f7;
+	background-color: var(--background-color-tertiary);
 }
 
 .job-item__link {
@@ -386,7 +406,7 @@ body::-webkit-scrollbar {
 	height: 46px;
 	width: 38px;
 	/* background-color: #8dd335; */
-	background-color: #dee3e9;
+	background-color: var(--background-color-secondary);
 	border-radius: 5px;
 	display: flex;
 	justify-content: center;
@@ -406,9 +426,6 @@ body::-webkit-scrollbar {
 .job-item:nth-child(4n + 4) .job-item__badge {
   background-color: #d96a46;
 } */
-
-.job-item__middle {
-}
 
 .job-item__company {
 	font-size: 13px;
@@ -463,7 +480,7 @@ body::-webkit-scrollbar {
 .job-item__time {
 	font-size: 11px;
 	margin-top: 5px;
-	color: #515459;
+	color: var(--font-color);
 }
 
 /* MAIN */
@@ -569,6 +586,9 @@ body::-webkit-scrollbar {
 	width: 340px;
 	display: flex;
 	flex-direction: column;
+	color: var(--font-color);
+	background-color: var(--background-color-primary);
+	transition: all 0.2s ease-in;
 }
 
 /* SEARCH RESULTS */
@@ -602,7 +622,7 @@ body::-webkit-scrollbar {
 
 .sorting > i {
 	font-size: 11px;
-	color: #4c4f50;
+	color: var(--font-color);
 	margin-right: 5px;
 }
 
@@ -690,10 +710,11 @@ body::-webkit-scrollbar {
 /* JOB DETAILS */
 .job-details {
 	flex: 1;
-	background-color: #eff2f5;
+	background-color: var(--background-color-secondary);
 	position: relative;
 	border-top-right-radius: 12px;
 	border-bottom-right-radius: 8px;
+	transition: all 0.15s ease-in;
 }
 
 .job-details__start-view {
@@ -736,19 +757,16 @@ body::-webkit-scrollbar {
 	user-select: none;
 }
 
-.job-details__other {
-}
-
 .job-details__footer {
 	margin-left: 42px;
 	margin-right: 42px;
 	margin-top: 33px;
 	padding-top: 13px;
-	border-top: 1px solid #dce2e8;
+	border-top: 1px solid var(--font-color-secondary);
 }
 
 .job-details__footer-text {
-	color: #858b8f;
+	color: var(--font-color);
 	font-size: 10px;
 }
 
@@ -838,7 +856,7 @@ body::-webkit-scrollbar {
 .job-info__time {
 	font-size: 12px;
 	transform: translateY(1px);
-	color: #494d4f;
+	color: var(--font-color);
 }
 
 .bookmark-btn {
@@ -959,7 +977,7 @@ body::-webkit-scrollbar {
 .reviews__item {
 	font-size: 13px;
 	font-style: italic;
-	color: #494d4f;
+	color: var(--font-color);
 	position: relative;
 	transform-style: preserve-3d;
 }
@@ -970,7 +988,7 @@ body::-webkit-scrollbar {
 	font-size: 50px;
 	top: -15px;
 	left: -10px;
-	color: #d2d7db;
+	color: var(--font-color-secondary);
 	transform: translateZ(-1px);
 }
 
@@ -1030,9 +1048,6 @@ body::-webkit-scrollbar {
 	border-right: 5px solid #e2e7e9;
 	border-bottom: 5px solid #e2e7e9;
 	border-left: 5px solid #ccd1d3;
-}
-
-.spinner--search {
 }
 
 .spinner--job-details {
